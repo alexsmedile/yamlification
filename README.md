@@ -33,20 +33,40 @@ This is not summarization. It is format conversion with structure preserved.
 
 ## Quick Start
 
-### Install from GitHub
+### Claude Code — install from marketplace
+
+Add this repo as a marketplace, then install the plugin:
 
 ```bash
-npx skills add https://github.com/alexsmedile/yamlification
+/plugin marketplace add alexsmedile/yamlification
+/plugin install yamlification@alexsmedile-yamlification
 ```
 
-### Or install locally
+Or open the interactive plugin manager and browse from there:
+
+```bash
+/plugin
+```
+
+### Claude Code — install from local clone
 
 ```bash
 git clone https://github.com/alexsmedile/yamlification
-cd yamlification
+claude --plugin-dir ./yamlification
 ```
 
-Then install the skills you want from `skills/` into your host environment.
+### Codex — install from GitHub
+
+```bash
+codex plugin install https://github.com/alexsmedile/yamlification
+```
+
+### Codex — install from local clone
+
+```bash
+git clone https://github.com/alexsmedile/yamlification
+codex plugin install ./yamlification
+```
 
 ### Use it
 
@@ -196,15 +216,15 @@ Install only what you need:
 
 ### Plugin metadata
 
-This repo also includes plugin metadata for local Claude and Codex-style plugin workflows:
+This repo includes plugin manifests for Claude Code and Codex:
 
 ```text
-.claude-plugin/
-.codex-plugin/
-.agents/plugins/
+.claude-plugin/plugin.json   ← Claude Code host
+.codex-plugin/plugin.json    ← Codex host
+.agents/plugins/marketplace.json
 ```
 
-That makes the repository usable both as a skill library and as a repo-root plugin package.
+That makes the repository usable both as a skill library and as an installable plugin package via `/plugin` (Claude Code) or `codex plugin install` (Codex).
 
 ---
 
