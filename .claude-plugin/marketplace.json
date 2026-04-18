@@ -1,0 +1,25 @@
+{
+  "name": "yaml-skills",
+  "owner": {
+    "name": "Alessandro Smedile"
+  },
+  "metadata": {
+    "description": "Claude/Codex skills for yamlification and deyamlification workflows",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "yaml-skills",
+      "source": "./",
+      "description": "Claude/Codex skills for yamlification and deyamlification workflows",
+      "version": "1.0.0",
+      "author": {
+        "name": "Alessandro Smedile"
+      },
+      "homepage": "https://github.com/alexsmedile/yaml-skills",
+      "repository": "https://github.com/alexsmedile/yaml-skills",
+      "license": "MIT",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "yaml-skills",
+  "version": "1.0.0",
+  "description": "Claude/Codex skills for yamlification and deyamlification workflows",
+  "author": {
+    "name": "Alessandro Smedile",
+    "url": "https://github.com/alexsmedile"
+  },
+  "homepage": "https://github.com/alexsmedile/yaml-skills",
+  "repository": "https://github.com/alexsmedile/yaml-skills",
+  "license": "MIT",
+  "keywords": [
+    "yaml",
+    "markdown",
+    "claude",
+    "codex",
+    "skills",
+    "ai-workflows"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "YAML Skills",
+    "shortDescription": "Convert markdown into agent-friendly YAML and back again.",
+    "longDescription": "A Claude/Codex skills pack for yamlification and deyamlification workflows, including lean, minified, max, delta, and markdown reconstruction modes.",
+    "developerName": "Alessandro Smedile",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/alexsmedile/yaml-skills",
+    "privacyPolicyURL": "https://github.com/alexsmedile/yaml-skills/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/alexsmedile/yaml-skills/blob/main/TERMS.md",
+    "defaultPrompt": [
+      "Yamlify this README into a lean agent context.",
+      "Generate a delta YAML from this updated spec.",
+      "Deyamlify this agent YAML into a clean markdown doc."
+    ],
+    "brandColor": "#2F6B5F",
+    "logo": "./assets/yamlify-schema.png",
+    "screenshots": [
+      "./assets/yamlify-schema.png"
+    ]
+  }
+}
