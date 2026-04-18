@@ -1,6 +1,6 @@
 # Privacy Policy
 
-`yaml-skills` is a local plugin package containing prompt-based skills and static assets.
+`yamlification` is a local plugin package containing prompt-based skills and static assets.
 
 You can use it with your your AI agent / harness of choice.
 
@@ -18,4 +18,4 @@ may be processed according to that host platform's policies and your configurati
 
 For repository issues, use the GitHub project:
 
-`https://github.com/alexsmedile/yaml-skills`
+`https://github.com/alexsmedile/yamlification`

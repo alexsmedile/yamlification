@@ -1,13 +1,13 @@
 {
-  "name": "yaml-skills",
+  "name": "yamlification",
   "version": "1.0.0",
   "description": "Claude/Codex skills for yamlification and deyamlification workflows",
   "author": {
     "name": "Alessandro Smedile",
     "url": "https://github.com/alexsmedile"
   },
-  "homepage": "https://github.com/alexsmedile/yaml-skills",
-  "repository": "https://github.com/alexsmedile/yaml-skills",
+  "homepage": "https://github.com/alexsmedile/yamlification",
+  "repository": "https://github.com/alexsmedile/yamlification",
   "license": "MIT",
   "keywords": [
     "yaml",
@@ -19,7 +19,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "YAML Skills",
+    "displayName": "yamlification",
     "shortDescription": "Convert markdown into agent-friendly YAML and back again.",
     "longDescription": "A Claude/Codex skills pack for yamlification and deyamlification workflows, including lean, minified, max, delta, and markdown reconstruction modes.",
     "developerName": "Alessandro Smedile",
@@ -28,9 +28,9 @@
       "Read",
       "Write"
     ],
-    "websiteURL": "https://github.com/alexsmedile/yaml-skills",
-    "privacyPolicyURL": "https://github.com/alexsmedile/yaml-skills/blob/main/PRIVACY.md",
-    "termsOfServiceURL": "https://github.com/alexsmedile/yaml-skills/blob/main/TERMS.md",
+    "websiteURL": "https://github.com/alexsmedile/yamlification",
+    "privacyPolicyURL": "https://github.com/alexsmedile/yamlification/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/alexsmedile/yamlification/blob/main/TERMS.md",
     "defaultPrompt": [
       "Yamlify this README into a lean agent context.",
       "Generate a delta YAML from this updated spec.",

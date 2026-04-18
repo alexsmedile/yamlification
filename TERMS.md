@@ -1,6 +1,6 @@
 # Terms of Use
 
-`yaml-skills` is provided under the MIT License included in this repository.
+`yamlification` is provided under the MIT License included in this repository.
 
 The skills and assets are provided as-is, without warranty of any kind.
 You are responsible for reviewing generated output before using it in production,
