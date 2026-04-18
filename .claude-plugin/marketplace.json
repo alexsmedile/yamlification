@@ -1,5 +1,5 @@
 {
-  "name": "yaml-skills",
+  "name": "yamlification",
   "owner": {
     "name": "Alessandro Smedile"
   },
@@ -9,15 +9,15 @@
   },
   "plugins": [
     {
-      "name": "yaml-skills",
+      "name": "yamlification",
       "source": "./",
       "description": "Claude/Codex skills for yamlification and deyamlification workflows",
       "version": "1.0.0",
       "author": {
         "name": "Alessandro Smedile"
       },
-      "homepage": "https://github.com/alexsmedile/yaml-skills",
-      "repository": "https://github.com/alexsmedile/yaml-skills",
+      "homepage": "https://github.com/alexsmedile/yamlification",
+      "repository": "https://github.com/alexsmedile/yamlification",
       "license": "MIT",
       "category": "productivity"
     }

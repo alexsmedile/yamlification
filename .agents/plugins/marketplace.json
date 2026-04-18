@@ -1,11 +1,11 @@
 {
-  "name": "yaml-skills",
+  "name": "yamlification",
   "interface": {
-    "displayName": "YAML Skills"
+    "displayName": "yamlification"
   },
   "plugins": [
     {
-      "name": "yaml-skills",
+      "name": "yamlification",
       "source": {
         "source": "local",
         "path": "./"
