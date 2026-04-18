@@ -138,11 +138,14 @@ technical specs, API docs, architecture decision records (ADRs).
 ### Step 1: Read the YAML structure
 
 Before writing:
-- Identify the YAML mode (`lean`, `max`, `delta`, `minified`).
+- Identify the YAML mode (`lean`, `max`, `delta`, `minified`, or `ultrapack_*`).
 - Extract `intent`, `constraints`, `_meta` — these drive the intro.
 - Note all YAML comments — they are expansion cues.
 - Note all `TBD` and `STALE` values — they become open questions.
 - Identify the document type from content (spec, README, notes, config).
+- If mode is `ultrapack_*`, check `_meta.mode` for compression level (`scaffold`,
+  `core`, `ultra`) and check for a `_manifest` or `_chunks` block — deferred
+  content will be absent from the YAML and must be flagged in the output.
 
 ### Step 2: Choose the output mode
 
@@ -173,6 +176,15 @@ General mapping rules:
 | `delta.changed` | "Recent Changes" section |
 | `delta.added` | Integrated into relevant sections |
 | `delta.removed` | "Resolved Items" section |
+| `_manifest` entry | Reference note: "full detail available on request" |
+| `_chunks` entry | Callout: section exists but was not loaded |
+| `deferred_state: N items` | "N additional items not loaded" note in that section |
+| Skeleton value (3–5 words) | Minimal prose sentence; do not invent detail |
+| Arrow chain (`A → B → C`) | Prose flow description of the sequence |
+| Conditional bracket `[cond] → outcome` | "When X, the system does Y" sentence |
+| Inline scope `key(scope): val` | Qualify the statement: "In [scope], ..." |
+| Symbol prefix (`+`, `-`, `~`, `!`, `?`) | Translate: + = added/enabled, - = removed/deprecated, ~ = approximate, ! = required/critical, ? = unknown/TBD |
+| `→ ref: key_path` | Inline reference: "see [section]" |
 
 ### Step 4: Write, don't dump
 
@@ -258,6 +270,97 @@ Default to option 1 unless the user requests the full document.
 
 ### From `max`
 Max YAML is richest — expand generously. Full spec or doc output is ideal.
+
+### From `ultrapack`
+
+Ultrapack applies a four-layer information priority model before compressing.
+Layers 3 and 4 are partially or fully dropped depending on compression level.
+The output document will be incomplete — this is by design, not a deyamlify error.
+
+**Always open with a completeness caveat** keyed to the compression level:
+
+```markdown
+> ⚠️ Derived from ultrapack (`{level}` compression). Layer 3 reference content
+> was {compressed inline / deferred to manifest / dropped}. Sections marked
+> [deferred] can be loaded on request.
+```
+
+**By compression level:**
+
+| Level | What survived | What to do |
+|---|---|---|
+| `scaffold` | Layers 1–2 full; Layer 3 compressed to 1–2 lines per section | Expand normally; treat skeleton values as minimal stubs |
+| `core` | Layers 1–2 full; Layer 3 deferred to `_manifest` | Expand Layers 1–2 fully; render `_manifest` as a "Deferred Sections" appendix |
+| `ultra` | Layer 1 full; Layer 2 top items only; Layer 3 skeleton only | Expand what's there; flag every skeleton value as potentially incomplete |
+
+**Decoding ultrapack encoding techniques** — these appear in the YAML values
+and must be translated back to natural language:
+
+- **Predicate-stripped values** (`golden_circle: Why→How→What order`): expand
+  to a sentence that names the subject and states the claim. Do not pad — the
+  stripped form is intentionally lean. One sentence is usually enough.
+
+- **Noun-chain keys** (`user_token_auth`, `security_change_approvers`): convert
+  to natural English noun phrases when writing section headers or prose
+  ("user token authentication", "security change approvers").
+
+- **Skeleton values** (3–5 word payloads): these are placeholders, not full
+  descriptions. Write one sentence that conveys the core claim; flag as
+  `[deferred — limited detail]` if the section warrants more depth.
+
+- **Arrow chains** (`request → cache_miss → DB_fetch → cache_write(5m) → return`):
+  write as a prose flow sequence. "On a cache miss, the system fetches the
+  value from the database, writes it to the cache with a 5-minute TTL, then
+  returns it to the caller."
+
+- **Conditional brackets** (`[no_auth] → 401`, `[write] → 503`): write as
+  conditional sentences. "[no_auth] → 401" becomes "Unauthenticated requests
+  receive a 401 response."
+
+- **Inline scope** (`latency(p99): 500ms`, `access(admin): delete+view`):
+  qualify the statement explicitly. "The p99 latency target is 500ms."
+  "Admin users can delete and view records."
+
+- **Symbol vocabulary**: translate before writing prose.
+  - `+dark_mode` → "Dark mode has been added."
+  - `-v1_api` → "The v1 API has been deprecated."
+  - `~80% done` → "Approximately 80% complete."
+  - `!no_pii` → "Storing PII is prohibited." (mark as a constraint)
+  - `?retention_policy` → Open question in the Open Questions section.
+
+- **State-collapsed items** (`refresh_endpoint: blocked→auth_spec_signoff`):
+  expand each field. "The refresh endpoint implementation is currently
+  blocked, pending sign-off on the auth spec."
+
+- **Schema-then-values tables** (`_schema: [method+path, auth, rate_limit, owner]`):
+  render as a proper markdown table using the schema as column headers.
+
+- **Cross-references** (`token_expiry: → ref: auth.token_ttl`): resolve
+  inline — find the referenced value and write it into the sentence rather
+  than exposing the pointer.
+
+**Handling `_manifest` and `_chunks`:**
+
+At `core` level, a `_manifest` block lists deferred Layer 3 content. Render
+this as an appendix section at the end of the document:
+
+```markdown
+## Deferred Sections
+
+The following sections were compressed out of this document and are available
+on request:
+
+- **{id}**: {summary}. (~{tokens} tokens) — request: "{request phrase}"
+```
+
+At `ultra` level with a `deferred_state` count, add a note within the
+relevant section: "_(N additional items not included at this compression
+level — request to load if needed.)_"
+
+For chunked manifest output (`ultrapack_chunked`), the main YAML contains
+only Layer 1 (intent + constraints) plus the chunk index. Expand only what
+is present; render the chunk list as a "Document Sections" table showing
+scope and phase relevance. Do not invent content for unloaded chunks.
 
 ---
 

@@ -19,11 +19,13 @@ When that context grows, agents lose track, token costs rise, and cross-session 
 
 ## What This Does
 
-`yamlification` gives you three focused skills:
+`yamlification` gives you five focused skills:
 
 - `yamlify` converts Markdown into compact YAML for agent context.
 - `yamlify-advanced` adds agent-ready structure such as `_meta`, `intent`, `constraints`, and `delta` updates.
 - `deyamlify` turns YAML back into readable Markdown for humans.
+- `yamlify-review` audits and compares Markdown and YAML files for quality, fidelity, and drift.
+- `ultrapack` applies extreme compression (80–95%) to documents too large for standard YAML context.
 
 This is not summarization. It is format conversion with structure preserved.
 
@@ -69,6 +71,8 @@ Expected result:
 | `yamlify` | Converts Markdown into compact YAML in `lean`, `minified`, or `max` mode | General document compression |
 | `yamlify-advanced` | Adds agent-ready conventions and a `delta` mode for changes over time | Multi-session workflows and downstream agent use |
 | `deyamlify` | Expands YAML back into readable Markdown in `doc`, `brief`, or `spec` mode | Handoffs, reports, READMEs, and formal docs |
+| `yamlify-review` | Audits single files or compares markdown/YAML pairs for quality and drift | QA before using context in a workflow |
+| `ultrapack` | Extreme compression using a layer priority model and 13 encoding techniques | Documents too large for standard YAML context |
 
 ---
 
@@ -85,6 +89,12 @@ Three YAML output modes are triggered by natural language. The default is `lean`
 | `doc` | `"deyamlify this"` | n/a | Human-readable output |
 | `brief` | `"brief"` / `"summary"` | n/a | Handoffs and status updates |
 | `spec` | `"spec"` / `"formal doc"` | n/a | Structured documentation |
+| `audit` | `"review this"` / `"is this good?"` | n/a | Single-file health check (yamlify-review) |
+| `compare` | `"compare these"` / `"did anything get lost?"` | n/a | Fidelity and drift check (yamlify-review) |
+| `optimize` | `"make this leaner"` / `"trim this"` | n/a | Token efficiency audit (yamlify-review) |
+| `scaffold` | `"ultrapack this"` | ~50–65% | Session start, full orientation (ultrapack) |
+| `core` | `"ultrapack this"` | ~70–82% | Mid-session execution (ultrapack) |
+| `ultra` | `"maximum compression"` | ~85–95% | Critical context pressure (ultrapack) |
 
 **Core mechanic:** keys are semantic labels. Values are dense payloads. YAML comments carry nuance that does not compress cleanly into a value, so they remain first-class instead of being treated as throwaway notes.
 
@@ -96,9 +106,14 @@ Three YAML output modes are triggered by natural language. The default is `lean`
 Markdown document
       |
       v
-  yamlify / yamlify-advanced
+  yamlify-review (audit)         ← optional QA step
       |
-      +--> lean / minified / max / delta YAML
+      v
+  yamlify / yamlify-advanced / ultrapack
+      |
+      +--> lean / minified / max / delta / scaffold / core / ultra YAML
+      |
+      +--  yamlify-review (compare / optimize)  ← quality check on output
       |
       v
     deyamlify
@@ -110,9 +125,11 @@ Human-readable Markdown
 Typical workflow:
 
 1. Start with a README, spec, or notes file.
-2. Convert it to `lean` YAML and load that as agent context.
-3. Use `minified` when the session gets long, or `delta` when only part of the context changed.
-4. Convert the current YAML back into a `doc`, `brief`, or `spec` when a human needs to review it.
+2. Optionally run `yamlify-review audit` to assess yamlification readiness.
+3. Convert to `lean` YAML with `yamlify`; use `ultrapack` if the document is very large.
+4. Use `minified` or `ultrapack core` when the session gets long, or `delta` when only part of the context changed.
+5. Run `yamlify-review compare` to check fidelity between source and compressed output.
+6. Convert the current YAML back into a `doc`, `brief`, or `spec` when a human needs to review it.
 
 ---
 
@@ -164,7 +181,9 @@ That same YAML can then be expanded back into readable Markdown with `deyamlify`
 skills/
 ├── yamlify/
 ├── yamlify-advanced/
-└── deyamlify/
+├── deyamlify/
+├── yamlify-review/
+└── ultrapack/
 ```
 
 Install only what you need:
@@ -172,6 +191,8 @@ Install only what you need:
 - Use `yamlify` for general document compression.
 - Use `yamlify-advanced` when another agent or workflow will consume the YAML.
 - Use `deyamlify` when YAML needs to become a document again.
+- Use `yamlify-review` to audit YAML quality or check for drift between source and output.
+- Use `ultrapack` when documents are too large for standard YAML context (80–95% reduction).
 
 ### Plugin metadata
 
@@ -218,7 +239,9 @@ yamlification/
 ├── skills/
 │   ├── yamlify/
 │   ├── yamlify-advanced/
-│   └── deyamlify/
+│   ├── deyamlify/
+│   ├── yamlify-review/
+│   └── ultrapack/
 ├── assets/
 ├── .claude-plugin/
 ├── .codex-plugin/
