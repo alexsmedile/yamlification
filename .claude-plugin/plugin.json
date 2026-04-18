@@ -1,0 +1,19 @@
+{
+  "name": "yaml-skills",
+  "version": "1.0.0",
+  "description": "Claude/Codex skills for yamlification and deyamlification workflows",
+  "author": {
+    "name": "Alessandro Smedile"
+  },
+  "homepage": "https://github.com/alexsmedile/yaml-skills",
+  "repository": "https://github.com/alexsmedile/yaml-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude",
+    "codex",
+    "skills",
+    "yaml",
+    "markdown",
+    "ai-workflows"
+  ]
+}

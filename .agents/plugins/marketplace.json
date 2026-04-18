@@ -1,0 +1,20 @@
+{
+  "name": "yaml-skills",
+  "interface": {
+    "displayName": "YAML Skills"
+  },
+  "plugins": [
+    {
+      "name": "yaml-skills",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
