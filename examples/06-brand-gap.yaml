@@ -1,0 +1,48 @@
+# lean
+meta:
+  source: 06-brand-gap.md
+  type: book_notes
+  origin: https://www.willpatrick.co.uk/notes/the-brand-gap-marty-neumeier
+
+book:
+  title: The Brand Gap
+  author: Marty Neumeier
+  rating: 8/10
+
+core_concept:
+  brand_definition: collective gut feeling people develop about a company/product  # built on trust, not features
+  brand_gap: excelling at strategy OR creativity, not both → noise without coherence
+  charismatic_brand: one where people perceive there is no substitute
+
+disciplines:
+  differentiation:
+    questions: [Who are you?, What do you do?, Why does it matter?]
+    key: focus over breadth  # #1 in narrow category > average in broad one
+    insight: differentiation is about belonging, not features
+
+  collaboration:
+    models:
+      one_stop_shop: convenient but dilutes expertise
+      brand_agency: smaller agency coordinates niche specialists → higher quality
+      integrated_marketing_team: direct engagement with specialists; requires strong internal management
+
+  innovation:
+    driver: creativity — creates discomfort in logic-driven orgs
+    strategy: MAYA (Most Advanced Yet Acceptable) — push boundaries while staying digestible
+    naming:
+      strong_name_criteria: [distinctive, brief, appropriate, easy to pronounce/spell, likeable, extendable, protectable]
+      insight: high-imagery names (Apple) outperform low-imagery names (Accenture)
+
+  validation:
+    tests:
+      swap_test: replace elements with competitors' versions — assess distinctiveness
+      hand_test: can audiences identify brand when visual identity is hidden?
+      concept_test: validate core promise and brand fit with target audience
+      field_test: test prototypes in realistic market conditions
+    evaluation_criteria: [distinctiveness, relevance, memorability, extendability, depth]
+
+  cultivation:
+    nature: brand as living entity requiring consistent human behavior
+    requirement: ongoing internal education and value reinforcement throughout org
+
+takeaway: practical frameworks stripped of business book filler — actionable, not theoretical

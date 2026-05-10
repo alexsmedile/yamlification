@@ -1,0 +1,92 @@
+# lean
+meta:
+  source: 04-website-specs.md
+  type: spec
+  version: "2.1"
+  status: in_progress
+  date: 2025-04-15
+
+project:
+  name: Alessandro Smedile Personal Site
+  owner: Alessandro Smedile
+  goal: WordPress → Astro static site; improve performance, simplify CMS, establish portfolio
+  audience: designers, developers, product managers (potential collaborators/clients)
+
+stack:
+  framework: Astro 4.x (SSG + optional SSR)
+  styling: Tailwind CSS v3  # no custom CSS unless strictly necessary
+  deployment: Vercel free tier, auto-deploy from main
+  content: Markdown + MDX (blog, case studies)
+  analytics: Plausible privacy-first, self-hosted on Vercel
+  ruled_out: [Next.js — unnecessary complexity, Hugo — opaque templating]
+
+pages:
+  home:
+    layout: single-scroll
+    sections: [hero (name + role + 2 CTAs), 3 project cards, short about, blog link]
+    ctas: [View Work, Get in Touch]
+  work:
+    layout: filterable grid
+    filters: [Web, Branding, Product]
+    card_fields: [name, category, thumbnail, one-line desc, case study link]
+    pagination: none  # 10–15 projects max, all visible on load
+  blog:
+    layout: list, date descending
+    item_fields: [title, date, read time, 120-char excerpt]
+    categories: none at launch
+  about:
+    layout: two-column (desktop)
+    left: [photo, contact links (email/LinkedIn/GitHub)]
+    right: [bio ~200w, skills list, key roles timeline]
+  contact:
+    form_fields: [name, email, message]
+    handler: Formspree free (50 submissions/month)
+    captcha: none at launch  # add if spam becomes issue
+
+design_system:
+  typography:
+    display: Fraunces (variable 100–900)
+    body: Inter (400/500/600)
+    mono: JetBrains Mono (code only)
+    base_size: 16px
+    line_height: {body: 1.6, headings: 1.2}
+  colors:
+    background: "#0F0F0F"
+    surface: "#1A1A1A"
+    text_primary: "#F5F5F5"
+    text_secondary: "#A3A3A3"
+    accent: "#F5A623"  # amber — CTAs, links, highlights
+    border: "#2E2E2E"
+  spacing:
+    base: 8px
+    scale: [4, 8, 12, 16, 24, 32, 48, 64, 96]
+
+performance:
+  lighthouse: ≥95 all four categories
+  lcp: <2.5s mobile 3G
+  cls: <0.1
+  js: none on pages that don't need it  # Home/About excluded; Contact form uses it
+
+seo:
+  title_pattern: "{Page Title} — Alessandro Smedile"
+  descriptions: manually authored per page
+  og: [og:title, og:description, og:image]
+  canonical: required all pages
+  robots: allow all
+  sitemap: Astro sitemap integration
+
+accessibility:
+  standard: WCAG 2.1 AA
+  checks:
+    contrast: ≥4.5:1 body text  # bg vs #F5F5F5 = 19.1:1 — passes
+    images: alt text required (decorative: alt="")
+    keyboard: fully functional
+    focus: indicators visible on all interactive elements
+
+open_questions:
+  domain: keep alessandrosmedile.com or switch to smedile.com?  # both available, no deadline
+  dark_light_toggle: not v1 scope — use CSS variables from day one for future support
+  blog_comments: no at launch — revisit after 3 months
+  case_study_format: long-form narrative vs structured brief  # decision needed by 2025-05-01
+
+out_of_scope_v1: [RSS feed, newsletter, i18n, e-commerce, custom CMS]

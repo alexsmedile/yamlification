@@ -1,0 +1,72 @@
+# lean
+meta:
+  source: 07-brand-overview.md
+  type: template
+  domain: brand
+  status: draft
+  version: 1.0.0
+  date: 2026-04-19
+  # structural/system fields (id, layer, alias, lang, author) dropped — no downstream agent meaning
+
+identity:
+  name: ""
+  one_liner: ""
+  mission: ""   # why you exist, impact you want to make
+  vision: ""    # long-term destination
+
+values:
+  believes: []
+  pillars: []
+  manifesto: ""
+
+story:
+  brand_story: ""
+  founder_story: ""
+
+target:
+  main_audience:
+    who: ""
+    maturity_level: ""
+    pain_points: []
+    desires: []
+  niches: []
+  secondary_audiences: []
+
+value_proposition:
+  elevator_pitch: ""
+  main_promise: ""
+  problem_solved: ""
+  transformation: ""  # Before → After
+
+positioning:
+  category: ""  # e.g. education, creator economy, AI tools
+  differentiation: ""
+  market_context: ""
+  perceived_alternatives: []
+
+personality:
+  key_traits: []
+  behaviors: []
+  archetype: ""
+  communication_style: ""
+  visual_style: ""
+
+tone_of_voice:
+  characteristics: []
+  avoid: []
+
+messaging:
+  topics: []
+  key_phrases: []
+  brand_recall: ""
+  common_enemies: []
+
+offer:
+  main: ""
+  secondary: []
+  monetisation: ""  # e.g. Services, Digital products, Community
+
+funnel:
+  top: ""     # Awareness — e.g. free guides, social
+  middle: ""  # Consideration — e.g. lead magnet, newsletter
+  bottom: ""  # Conversion — e.g. call, product, service

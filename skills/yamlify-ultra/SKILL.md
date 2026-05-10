@@ -1,8 +1,9 @@
 ---
-name: ultrapack
+name: yamlify-ultra
+version: 1.1.0
 description: >
-  Extreme context compression for large documents that are too long to carry
-  as standard YAML context. Trigger this skill whenever a user needs to compress
+  Extreme context compression to YAML for large documents that are too long to carry
+  as context. Trigger this skill whenever a user needs to compress
   a large document, spec, codebase summary, or knowledge base for use as agent
   context; asks for "maximum compression", "extreme compression", "fit this in
   context", "ultrapack this", or "this is too big"; says the document is "too

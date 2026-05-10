@@ -1,0 +1,38 @@
+# lean — partial (conclusions-only; source is argument-first narrative)
+# Full reasoning chain lives in 03-narrative-essay.md — this captures decisions and evidence, not the argument arc
+meta:
+  source: 03-narrative-essay.md
+  type: narrative_essay  # argument-first — converted as conclusions-only
+  partial: true
+
+topic: monorepo adoption for engineering org
+
+context:
+  scale: 4 → 19 services over 18 months
+  trigger: cross-service coordination overhead becoming unsustainable
+
+problems_with_current_setup:
+  coordination_tax:
+    pattern: cross-service change → multiple PRs → merge order dependency → staging breakage
+    frequency: ~dozen times per quarter
+    hidden_cost: [context switching, cross-team overhead, reluctance to touch multi-service changes]
+  tooling_drift:
+    scope: linting config, CI pipeline, test runner, dependency pinning — 19x per change
+    risk: repos diverge, consistency enforcement becomes full-time job
+
+recommendation:
+  adopt_monorepo: true
+  start: Q3 (new services only)
+  migration_strategy: gradual — begin with 3 most frequently co-changing services
+  avoid: big-bang migration
+
+benefits:
+  - single linting config and CI pipeline
+  - one place to enforce standards
+  - tooling investment pays across all services simultaneously
+
+risks:
+  - git history complexity at scale
+  - build time growth without incremental builds + caching
+  - cultural friction over loss of repo autonomy
+  mitigation: real costs, require tooling/process investment — not blockers

@@ -1,6 +1,6 @@
 {
   "name": "yamlification",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Claude/Codex skills for yamlification and deyamlification workflows",
   "author": {
     "name": "Alessandro Smedile",
@@ -29,8 +29,6 @@
       "Write"
     ],
     "websiteURL": "https://github.com/alexsmedile/yamlification",
-    "privacyPolicyURL": "https://github.com/alexsmedile/yamlification/blob/main/PRIVACY.md",
-    "termsOfServiceURL": "https://github.com/alexsmedile/yamlification/blob/main/TERMS.md",
     "defaultPrompt": [
       "Yamlify this README into a lean agent context.",
       "Generate a delta YAML from this updated spec.",
