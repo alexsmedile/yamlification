@@ -3,7 +3,7 @@
 *Turn Markdown into token-efficient YAML, then turn it back into clean Markdown.*
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Version](https://img.shields.io/badge/version-1.0.0-green)
+![Version](https://img.shields.io/badge/version-1.2.0-green)
 ![Platform](https://img.shields.io/badge/platform-Claude%20%7C%20Codex%20%7C%20compatible-lightgrey)
 ![Category](https://img.shields.io/badge/category-productivity-2F6B5F)
 
@@ -19,19 +19,24 @@ When that context grows, agents lose track, token costs rise, and cross-session 
 
 ## What This Does
 
-`yamlification` gives you five focused skills:
+`yamlification` gives you four focused skills:
 
-- `yamlify` converts Markdown into compact YAML for agent context.
-- `yamlify-advanced` adds agent-ready structure such as `_meta`, `intent`, `constraints`, and `delta` updates.
+- `yamlify` converts Markdown into compact YAML for agent context (`lean`, `minified`, `max`, `delta`).
 - `deyamlify` turns YAML back into readable Markdown for humans.
 - `yamlify-review` audits and compares Markdown and YAML files for quality, fidelity, and drift.
-- `ultrapack` applies extreme compression (80–95%) to documents too large for standard YAML context.
+- `yamlify-ultra` applies extreme compression (80–95%) to documents too large for standard YAML context.
 
 This is not summarization. It is format conversion with structure preserved.
 
 ---
 
 ## Quick Start
+
+### Skills Pkg Manager
+
+```bash
+npx skills add alexsmedile/yamlification
+```
 
 ### Claude Code — install from marketplace
 
@@ -42,30 +47,20 @@ Add this repo as a marketplace, then install the plugin:
 /plugin install yamlification@alexsmedile-yamlification
 ```
 
-Or open the interactive plugin manager and browse from there:
+Or open the interactive `/plugin` manager and browse from there:
 
-```bash
-/plugin
-```
-
-### Claude Code — install from local clone
+### Install from local clone
 
 ```bash
 git clone https://github.com/alexsmedile/yamlification
 claude --plugin-dir ./yamlification
+codex plugin install ./yamlification
 ```
 
 ### Codex — install from GitHub
 
 ```bash
 codex plugin install https://github.com/alexsmedile/yamlification
-```
-
-### Codex — install from local clone
-
-```bash
-git clone https://github.com/alexsmedile/yamlification
-codex plugin install ./yamlification
 ```
 
 ### Use it
@@ -88,11 +83,10 @@ Expected result:
 
 | Skill | What it does | Best for |
 |---|---|---|
-| `yamlify` | Converts Markdown into compact YAML in `lean`, `minified`, or `max` mode | General document compression |
-| `yamlify-advanced` | Adds agent-ready conventions and a `delta` mode for changes over time | Multi-session workflows and downstream agent use |
+| `yamlify` | Converts Markdown into compact YAML in `lean`, `minified`, `max`, or `delta` mode | General document compression and multi-session workflows |
 | `deyamlify` | Expands YAML back into readable Markdown in `doc`, `brief`, or `spec` mode | Handoffs, reports, READMEs, and formal docs |
 | `yamlify-review` | Audits single files or compares markdown/YAML pairs for quality and drift | QA before using context in a workflow |
-| `ultrapack` | Extreme compression using a layer priority model and 13 encoding techniques | Documents too large for standard YAML context |
+| `yamlify-ultra` | Extreme compression using a layer priority model and 13 encoding techniques | Documents too large for standard YAML context |
 
 ---
 
@@ -103,7 +97,7 @@ Three YAML output modes are triggered by natural language. The default is `lean`
 | Mode | Command | Approx. token reduction | Typical use |
 |---|---|---|---|
 | `lean` | `"yamlify this"` | ~60% | Starting a project, loading context |
-| `minified` | `"minified"` / `"smallest"` | ~80% | Mid-session reminder, keeping an agent on track |
+| `minified` | `"minified"` / `"smallest"` | ~70–85% | Mid-session reminder, keeping an agent on track |
 | `max` | `"max"` / `"full yaml"` | ~20% | Complex specs where nuance is critical |
 | `delta` | `"delta"` / `"what changed"` | varies | Updating context across sessions |
 | `doc` | `"deyamlify this"` | n/a | Human-readable output |
@@ -112,9 +106,9 @@ Three YAML output modes are triggered by natural language. The default is `lean`
 | `audit` | `"review this"` / `"is this good?"` | n/a | Single-file health check (yamlify-review) |
 | `compare` | `"compare these"` / `"did anything get lost?"` | n/a | Fidelity and drift check (yamlify-review) |
 | `optimize` | `"make this leaner"` / `"trim this"` | n/a | Token efficiency audit (yamlify-review) |
-| `scaffold` | `"ultrapack this"` | ~50–65% | Session start, full orientation (ultrapack) |
-| `core` | `"ultrapack this"` | ~70–82% | Mid-session execution (ultrapack) |
-| `ultra` | `"maximum compression"` | ~85–95% | Critical context pressure (ultrapack) |
+| `scaffold` | `"ultrapack this"` | ~50–65% | Session start, full orientation (yamlify-ultra) |
+| `core` | `"ultrapack this"` | ~70–82% | Mid-session execution (yamlify-ultra) |
+| `ultra` | `"maximum compression"` | ~85–95% | Critical context pressure (yamlify-ultra) |
 
 **Core mechanic:** keys are semantic labels. Values are dense payloads. YAML comments carry nuance that does not compress cleanly into a value, so they remain first-class instead of being treated as throwaway notes.
 
@@ -129,7 +123,7 @@ Markdown document
   yamlify-review (audit)         ← optional QA step
       |
       v
-  yamlify / yamlify-advanced / ultrapack
+  yamlify / ultrapack
       |
       +--> lean / minified / max / delta / scaffold / core / ultra YAML
       |
@@ -169,13 +163,11 @@ YAML output:
 
 ```yaml
 # lean
----
 auth:
   mechanism: JWT bearer token
-  token_ttl: 24h
-  refresh_ttl: 30d
-  # All endpoints require Bearer token except:
-  public_endpoints: [/health, /login]
+  token_expires_after: 24h
+  refresh_expires_after: 30d
+  public_endpoints: [/health, /login]  # all others require Bearer token
 ```
 
 That same YAML can then be expanded back into readable Markdown with `deyamlify`.
@@ -200,19 +192,17 @@ That same YAML can then be expanded back into readable Markdown with `deyamlify`
 ```text
 skills/
 ├── yamlify/
-├── yamlify-advanced/
 ├── deyamlify/
 ├── yamlify-review/
-└── ultrapack/
+└── yamlify-ultra/
 ```
 
 Install only what you need:
 
-- Use `yamlify` for general document compression.
-- Use `yamlify-advanced` when another agent or workflow will consume the YAML.
+- Use `yamlify` for general document compression and agent-ready workflows.
 - Use `deyamlify` when YAML needs to become a document again.
 - Use `yamlify-review` to audit YAML quality or check for drift between source and output.
-- Use `ultrapack` when documents are too large for standard YAML context (80–95% reduction).
+- Use `yamlify-ultra` when documents are too large for standard YAML context (80–95% reduction).
 
 ### Plugin metadata
 
@@ -247,7 +237,7 @@ That makes the repository usable both as a skill library and as an installable p
 
 - **Restructuring, not summarization.** Meaning stays; format changes.
 - **Comments carry nuance.** YAML comments preserve context that does not fit cleanly into a key/value pair.
-- **Agent readability is a contract.** The advanced skill surfaces `_meta`, `intent`, and `constraints` so downstream agents can orient quickly.
+- **Agent readability is a contract.** `intent:` and `meta:` in the output orient downstream agents quickly without reading the full document.
 - **Round-trip matters.** YAML is for agent efficiency; Markdown is for human review and sharing.
 
 ---
@@ -258,10 +248,9 @@ That makes the repository usable both as a skill library and as an installable p
 yamlification/
 ├── skills/
 │   ├── yamlify/
-│   ├── yamlify-advanced/
 │   ├── deyamlify/
 │   ├── yamlify-review/
-│   └── ultrapack/
+│   └── yamlify-ultra/
 ├── assets/
 ├── .claude-plugin/
 ├── .codex-plugin/

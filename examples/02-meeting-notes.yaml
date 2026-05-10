@@ -1,0 +1,36 @@
+# lean
+meta:
+  source: 02-meeting-notes.md
+  type: meeting_notes
+  date: 2025-05-10
+
+attendees:
+  Marco: platform
+  Sara: security
+  Luca: mobile
+  Alex: product
+
+decision:
+  auth_approach: JWT tokens  # shared session store rejected — operational complexity + SPOF
+  rationale:
+    - stateless required for mobile offline mode
+    - security team comfortable with token expiry approach
+
+token_config:
+  access_ttl: 24h  # industry benchmark per Sara
+  refresh_ttl: 30d  # raised by Luca, agreed by group
+  public_endpoints: [/health, /login]  # load balancer depends on /health
+
+open_questions:
+  refresh_rotation:
+    status: undecided
+    options: [rotate-always, rotate-on-suspicion]
+    blocker: Sara security brief due 2025-05-17
+    tension: security (rotate-always) vs mobile UX (storage churn on device)
+
+actions:
+  - {owner: Marco, task: implement refresh endpoint, due: 2025-05-24}
+  - {owner: Sara, task: security brief on rotation options, due: 2025-05-17}
+  - {owner: Alex, task: update product spec to reflect JWT decision}
+
+next_meeting: TBD — after Sara's brief is ready

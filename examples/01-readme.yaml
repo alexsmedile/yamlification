@@ -1,0 +1,32 @@
+# lean
+meta:
+  source: 01-readme.md
+  type: README
+
+project: yamlification
+tagline: Skill pack for AI workflows — tighter context, lower tokens, cleaner handoffs
+
+problem:
+  markdown_waste: repetition/prose/structure helpful to humans, wasteful for agent context windows
+  consequences: [agents lose track, token costs rise, messy cross-session continuity]
+
+skills:
+  yamlify: Markdown → compact YAML for agent context
+  yamlify_advanced: adds _meta/intent/constraints/delta structure
+  deyamlify: YAML → readable Markdown for humans
+  yamlify_review: audits and compares Markdown and YAML for quality/fidelity/drift
+  ultrapack: extreme compression (80–95%) for oversized documents
+
+design_principle: format conversion with structure preserved — not summarization
+
+install:
+  claude_code:
+    - /plugin marketplace add alexsmedile/yamlification
+    - /plugin install yamlification@alexsmedile-yamlification
+  codex: npx codex-marketplace add alexsmedile/yamlification --plugin
+  skills_cli: npx skills add alexsmedile/yamlification
+  manual:
+    - git clone https://github.com/alexsmedile/yamlification
+    - claude --plugin-dir ./yamlification
+
+license: MIT

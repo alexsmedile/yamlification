@@ -1,0 +1,59 @@
+# lean
+meta:
+  source: 05-wikipedia-yaml.md
+  type: reference
+  origin: https://en.wikipedia.org/wiki/YAML
+
+yaml:
+  full_name: YAML Ain't Markup Language  # originally "Yet Another Markup Language" (2001), repurposed 2002
+  pronunciation: YAM-əl
+  purpose: human-readable data serialization; config files, data storage/transmission
+  current_version: 1.2.2 (2021-10-01)
+
+versions: ["1.0 (2004-01-29)", "1.1 (2005-01-18)", "1.2.0 (2009-07-21)", "1.2.2 (2021-10-01)"]
+authors: [Clark Evans, Ingy döt Net, Oren Ben-Kiki]
+
+syntax:
+  structure: Python-style whitespace indentation; tabs not allowed
+  comments: "# character, separated from tokens by whitespace"
+  lists: "leading hyphen, or inline [a, b, c]"
+  maps: "colon+space, or inline {key: val}"
+  strings: unquoted default; double-quotes (C escapes); single-quotes ('' only)
+  block_scalars: "| (preserve newlines), > (fold newlines)"
+  multi_doc: "separated by ---; optionally ended with ..."
+  anchors: "& define, * reference — all data types"
+  type_tags: "!! prefix (e.g. !!float, !!str)"
+  directives: "% prefix — %YAML version, %TAG URI shortcuts"
+
+data_types:
+  core: [floats, ints, strings, lists, maps]
+  extended: [binary, timestamps, sets, ordered maps, hexadecimal]  # not universally implemented
+  autodetection: types inferred automatically; disambiguate with quotes or !!tags
+  edge_cases:
+    - "Yes → bool True (1.1) or string (1.2)"
+    - "123 → int; 123.0 → float"
+  user_defined: via single ! tag in app-specific parsers
+  composite_keys: multiple values as single key (coordinates, multi-field ids)
+
+comparisons:
+  json: YAML 1.2 makes JSON official subset; YAML adds comments/extensible types/anchors/unquoted strings  # JSON serialization significantly faster
+  toml: TOML = .ini advancement; uses dot notation vs YAML indentation; both target config files
+  xml: YAML lacks attributes, uses extensible types instead; no built-in schema validation; YAXML bridges XSLT/XML schema tools
+
+security:
+  nature: data-representation only — no executable commands
+  risk: language-specific tags allow arbitrary object instantiation → injection attacks (e.g. !!python/object/apply:os.system)
+  mitigation: use yaml.safe_load in Python; avoid unrestricted loaders for untrusted input
+
+criticism:
+  - dynamic parsers can execute commands via !! tags
+  - indentation errors in large files go unnoticed
+  - type autodetection surprises (Yes → bool, version numbers → floats)
+  - truncated files parse as valid (no mandatory terminator)
+  - spec complexity → inconsistent implementations and portability issues
+  alternatives: [StrictYAML, NestedText]
+
+file_format:
+  extensions: [.yaml (recommended since 2006), .yml (alias)]
+  mime: application/yaml  # finalized 2024, RFC by Polli/Wilde/Aro
+  encoding: [UTF-8, UTF-16, UTF-32]  # UTF-32 required only for JSON compatibility
