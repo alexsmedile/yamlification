@@ -1,23 +1,9 @@
 {
   "name": "yamlification",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Claude/Codex skills for yamlification and deyamlification workflows",
-  "author": {
-    "name": "Alessandro Smedile",
-    "url": "https://github.com/alexsmedile"
-  },
-  "homepage": "https://github.com/alexsmedile/yamlification",
-  "repository": "https://github.com/alexsmedile/yamlification",
-  "license": "MIT",
-  "keywords": [
-    "yaml",
-    "markdown",
-    "claude",
-    "codex",
-    "skills",
-    "ai-workflows"
-  ],
   "skills": "./skills/",
+  "hooks": "./hooks/hooks-codex.json",
   "interface": {
     "displayName": "yamlification",
     "shortDescription": "Convert markdown into agent-friendly YAML and back again.",
@@ -34,10 +20,6 @@
       "Generate a delta YAML from this updated spec.",
       "Deyamlify this agent YAML into a clean markdown doc."
     ],
-    "brandColor": "#2F6B5F",
-    "logo": "./assets/yamlify-schema.png",
-    "screenshots": [
-      "./assets/yamlify-schema.png"
-    ]
+    "brandColor": "#2F6B5F"
   }
 }

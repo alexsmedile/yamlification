@@ -44,6 +44,7 @@ This is not summarization. It is format conversion with structure preserved.
 
 ```bash
 npx codex-marketplace add alexsmedile/yamlification --plugin
+# then: codex /plugins -> browse and install
 ```
 
 ### Skills CLI
