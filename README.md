@@ -30,39 +30,44 @@ This is not summarization. It is format conversion with structure preserved.
 
 ---
 
-## Quick Start
+## Install
 
-### Skills Pkg Manager
+### Claude Code — marketplace
+
+```bash
+/plugin marketplace add alexsmedile/yamlification
+/plugin install yamlification@yamlification
+```
+
+Or open the interactive `/plugin` manager and browse from there.
+
+### Codex — marketplace
+
+Fastest — one command, activates the plugin directly:
+
+```bash
+npx codex-marketplace add alexsmedile/yamlification --plugin
+```
+
+Or via the built-in plugin manager:
+
+```bash
+codex plugin marketplace add alexsmedile/yamlification
+# then: codex /plugins → browse and install
+```
+
+### npx skills
 
 ```bash
 npx skills add alexsmedile/yamlification
 ```
 
-### Claude Code — install from marketplace
-
-Add this repo as a marketplace, then install the plugin:
-
-```bash
-/plugin marketplace add alexsmedile/yamlification
-/plugin install yamlification@alexsmedile-yamlification
-```
-
-Or open the interactive `/plugin` manager and browse from there:
-
-### Install from local clone
+### Test locally (no install)
 
 ```bash
 git clone https://github.com/alexsmedile/yamlification
-claude --plugin-dir ./yamlification
-npx codex-marketplace add ./yamlification --plugin
-# then: codex /plugins -> browse and install
-```
-
-### Codex — install from GitHub
-
-```bash
-npx codex-marketplace add alexsmedile/yamlification --plugin
-# then: codex /plugins -> browse and install
+claude --plugin-dir ./yamlification                  # Claude Code
+npx codex-marketplace add ./yamlification --plugin   # Codex
 ```
 
 ### Use it
@@ -187,7 +192,7 @@ That same YAML can then be expanded back into readable Markdown with `deyamlify`
 
 ---
 
-## Installation Options
+## Skill Bundle
 
 ### Skill folders
 
