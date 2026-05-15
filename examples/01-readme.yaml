@@ -23,7 +23,9 @@ install:
   claude_code:
     - /plugin marketplace add alexsmedile/yamlification
     - /plugin install yamlification@alexsmedile-yamlification
-  codex: npx codex-marketplace add alexsmedile/yamlification --plugin
+  codex:
+    - npx codex-marketplace add alexsmedile/yamlification --plugin
+    - codex /plugins
   skills_cli: npx skills add alexsmedile/yamlification
   manual:
     - git clone https://github.com/alexsmedile/yamlification

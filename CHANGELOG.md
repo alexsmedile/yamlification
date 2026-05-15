@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ---
 
+## [1.2.1] — 2026-05-16
+
+### Fixed
+- `.codex-plugin/plugin.json` — restored the required `hooks` field; trimmed non-functional metadata
+- `.agents/plugins/marketplace.json` — fixed broken `local`/`../../` source → GitHub URL source
+- README and examples — corrected invalid `codex plugin install` commands to `npx codex-marketplace add ... --plugin`
+- Added `hooks/hooks.json` + `hooks/hooks-codex.json` and a git-guard pre-commit hook for version-drift protection
+
+---
+
 ## [1.2.0] — 2026-05-11
 
 ### Breaking

@@ -3,7 +3,7 @@
 *Turn Markdown into token-efficient YAML, then turn it back into clean Markdown.*
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Version](https://img.shields.io/badge/version-1.2.0-green)
+![Version](https://img.shields.io/badge/version-1.2.1-green)
 ![Platform](https://img.shields.io/badge/platform-Claude%20%7C%20Codex%20%7C%20compatible-lightgrey)
 ![Category](https://img.shields.io/badge/category-productivity-2F6B5F)
 
@@ -54,13 +54,15 @@ Or open the interactive `/plugin` manager and browse from there:
 ```bash
 git clone https://github.com/alexsmedile/yamlification
 claude --plugin-dir ./yamlification
-codex plugin install ./yamlification
+npx codex-marketplace add ./yamlification --plugin
+# then: codex /plugins -> browse and install
 ```
 
 ### Codex — install from GitHub
 
 ```bash
-codex plugin install https://github.com/alexsmedile/yamlification
+npx codex-marketplace add alexsmedile/yamlification --plugin
+# then: codex /plugins -> browse and install
 ```
 
 ### Use it
@@ -214,7 +216,7 @@ This repo includes plugin manifests for Claude Code and Codex:
 .agents/plugins/marketplace.json
 ```
 
-That makes the repository usable both as a skill library and as an installable plugin package via `/plugin` (Claude Code) or `codex plugin install` (Codex).
+That makes the repository usable both as a skill library and as an installable plugin package via `/plugin` (Claude Code) or `npx codex-marketplace add` followed by `/plugins` (Codex).
 
 ---
 
