@@ -1,0 +1,6 @@
+[bridges.todo-md]
+path = "TODO.md"
+include_checked = false
+
+[bridges.todo-md.section_map.review-pass-needed]
+kind = "chore"

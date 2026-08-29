@@ -4,3 +4,10 @@ output/*
 !output/.gitkeep
 _archive/
 _backups/
+
+# Local-only: backups, snapshots, scratch — never committed
+_snapshots/
+_local/
+
+# Octopus machine-local activity state (absolute paths)
+.octopus/config.local.toml
